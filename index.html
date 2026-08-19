@@ -254,9 +254,9 @@
   <div class="wrap">
     <div class="section-head"><span class="num mono">03</span><h2>Services & pricing</h2></div>
     <div class="pkg-grid">
-      <a class="pkg" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Basic%20package%20(%2415)%3A%0A-%201%20Page%0A-%20Responsive%20Design%0A-%20Basic%20JavaScript%0A-%201%20Revision%0A-%203%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
+      <a class="pkg" id="pkg-basic" data-pkg="basic" data-label="Basic" data-details="- 1 Page%0A- Responsive Design%0A- Basic JavaScript%0A- 1 Revision%0A- 3 Days Delivery" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Basic%20package%20(%2480)%3A%0A-%201%20Page%0A-%20Responsive%20Design%0A-%20Basic%20JavaScript%0A-%201%20Revision%0A-%203%20Days%20Delivery%0A%0APlease%20share%20more%20details." onclick="trackInquiry('basic')" target="_blank" rel="noopener">
         <h3>Basic</h3>
-        <div class="price">$80</div>
+        <div class="price" id="price-basic">$80</div>
         <ul>
           <li>1 Page</li>
           <li>Responsive Design</li>
@@ -266,9 +266,9 @@
         </ul>
         <div class="pkg-cta">Order on WhatsApp →</div>
       </a>
-      <a class="pkg featured" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Standard%20package%20(%2435)%3A%0A-%20Up%20to%203%20Pages%0A-%20Responsive%20Design%0A-%20Standard%20JavaScript%0A-%20Contact%20Form%0A-%202%20Revisions%0A-%205%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
+      <a class="pkg featured" id="pkg-standard" data-pkg="standard" data-label="Standard" data-details="- Up to 3 Pages%0A- Responsive Design%0A- Standard JavaScript%0A- Contact Form%0A- 2 Revisions%0A- 5 Days Delivery" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Standard%20package%20(%2490)%3A%0A-%20Up%20to%203%20Pages%0A-%20Responsive%20Design%0A-%20Standard%20JavaScript%0A-%20Contact%20Form%0A-%202%20Revisions%0A-%205%20Days%20Delivery%0A%0APlease%20share%20more%20details." onclick="trackInquiry('standard')" target="_blank" rel="noopener">
         <h3>Standard</h3>
-        <div class="price">$90</div>
+        <div class="price" id="price-standard">$90</div>
         <ul>
           <li>Up to 3 Pages</li>
           <li>Responsive Design</li>
@@ -279,9 +279,9 @@
         </ul>
         <div class="pkg-cta">Order on WhatsApp →</div>
       </a>
-      <a class="pkg" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Premium%20package%20(%2460)%3A%0A-%20Up%20to%205%20Pages%0A-%20Responsive%20Design%0A-%20Advanced%20JavaScript%0A-%20Contact%20Form%0A-%20SEO%20Optimization%0A-%203%20Revisions%0A-%207%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
+      <a class="pkg" id="pkg-premium" data-pkg="premium" data-label="Premium" data-details="- Up to 5 Pages%0A- Responsive Design%0A- Advanced JavaScript%0A- Contact Form%0A- SEO Optimization%0A- 3 Revisions%0A- 7 Days Delivery" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Premium%20package%20(%24105)%3A%0A-%20Up%20to%205%20Pages%0A-%20Responsive%20Design%0A-%20Advanced%20JavaScript%0A-%20Contact%20Form%0A-%20SEO%20Optimization%0A-%203%20Revisions%0A-%207%20Days%20Delivery%0A%0APlease%20share%20more%20details." onclick="trackInquiry('premium')" target="_blank" rel="noopener">
         <h3>Premium</h3>
-        <div class="price">$105</div>
+        <div class="price" id="price-premium">$105</div>
         <ul>
           <li>Up to 5 Pages</li>
           <li>Responsive Design</li>
@@ -293,9 +293,9 @@
         </ul>
         <div class="pkg-cta">Order on WhatsApp →</div>
       </a>
-      <a class="pkg" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Graphic%20Design%20package%20(%2420)%3A%0A-%20Logo%20%2F%20Poster%20%2F%20Banner%0A-%20Custom%20Concept%0A-%20High-Res%20Files%0A-%202%20Revisions%0A-%203%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
+      <a class="pkg" id="pkg-graphic" data-pkg="graphic" data-label="Graphic Design" data-details="- Logo / Poster / Banner%0A- Custom Concept%0A- High-Res Files%0A- 2 Revisions%0A- 3 Days Delivery" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Graphic%20Design%20package%20(%2420)%3A%0A-%20Logo%20%2F%20Poster%20%2F%20Banner%0A-%20Custom%20Concept%0A-%20High-Res%20Files%0A-%202%20Revisions%0A-%203%20Days%20Delivery%0A%0APlease%20share%20more%20details." onclick="trackInquiry('graphic')" target="_blank" rel="noopener">
         <h3>Graphic Design</h3>
-        <div class="price">$20</div>
+        <div class="price" id="price-graphic">$20</div>
         <ul>
           <li>Logo / Poster / Banner</li>
           <li>Custom Concept</li>
@@ -347,16 +347,102 @@
       <h2>Have a project in mind?</h2>
       <p>Tell me what you're building — I'll reply with a clear scope, timeline and price.</p>
       <div class="actions">
-        <a href="https://wa.me/923134586476" class="btn btn-primary btn-whatsapp" target="_blank" rel="noopener">WhatsApp: +92 313 4586476 →</a>
-        <a href="https://www.fiverr.com/s/Q2Yd9xy" class="btn btn-ghost">Message me on Fiverr →</a>
+        <a href="https://wa.me/923134586476" id="whatsapp-cta" class="btn btn-primary btn-whatsapp" target="_blank" rel="noopener" onclick="trackInquiry('whatsapp')">WhatsApp: +92 313 4586476 →</a>
+        <a href="https://www.fiverr.com/s/BbBmKEG" id="fiverr-cta" class="btn btn-ghost" target="_blank" rel="noopener" onclick="trackInquiry('fiverr')">Message me on Fiverr →</a>
       </div>
     </div>
   </div>
 </section>
 
 <footer class="mono">
-  © 2026 Qasim Raza — Frontend Web Developer
+  © 2026 Qasim Raza — Frontend Web Developer · <a href="dashboard.html" style="opacity:0.6;">Admin</a>
 </footer>
 
+<script>
+/* ── Admin dashboard sync ──────────────────────────────────────────
+   This connects to a free JSON storage service so prices set in
+   dashboard.html show up here, and visits/inquiries are counted.
+   Paste your sync token below (get it from dashboard.html's Setup step).
+   If left blank, the site just uses the prices already in the HTML. */
+const SYNC_TOKEN = "PASTE_YOUR_TOKEN_HERE";
+const KV_BASE = "https://key-value.co/api";
+
+const DEFAULT_PRICES = { basic: 80, standard: 90, premium: 105, graphic: 20 };
+
+function buildWhatsAppHref(pkg, price) {
+  const text = `Hi, I'm interested in the ${pkg.dataset.label} package ($${price}):\n${decodeURIComponent(pkg.dataset.details)}\n\nPlease share more details.`;
+  return "https://wa.me/923134586476?text=" + encodeURIComponent(text);
+}
+
+function applyPrices(prices) {
+  document.querySelectorAll(".pkg[data-pkg]").forEach(pkg => {
+    const key = pkg.dataset.pkg;
+    const price = prices[key] ?? DEFAULT_PRICES[key];
+    const priceEl = document.getElementById("price-" + key);
+    if (priceEl) priceEl.textContent = "$" + price;
+    pkg.href = buildWhatsAppHref(pkg, price);
+  });
+}
+
+async function kvGet() {
+  const res = await fetch(`${KV_BASE}/retrieve`, { headers: { "X-KV-Token": SYNC_TOKEN } });
+  if (!res.ok) throw new Error("retrieve failed: " + res.status);
+  return res.json();
+}
+
+async function kvPatch(setObj, version) {
+  const res = await fetch(`${KV_BASE}/store`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json", "X-KV-Token": SYNC_TOKEN },
+    body: JSON.stringify({ version, patch: { set: setObj } })
+  });
+  return res;
+}
+
+async function incrementVisit() {
+  if (!SYNC_TOKEN || SYNC_TOKEN === "PASTE_YOUR_TOKEN_HERE") return;
+  try {
+    const current = await kvGet();
+    const data = current.data || {};
+    const newVal = (data.visits || 0) + 1;
+    await kvPatch({ visits: newVal }, current.version);
+  } catch (e) {
+    console.warn("visit sync skipped:", e.message);
+  }
+}
+
+async function incrementInquiry(source) {
+  if (!SYNC_TOKEN || SYNC_TOKEN === "PASTE_YOUR_TOKEN_HERE") return;
+  try {
+    const current = await kvGet();
+    const data = current.data || {};
+    const newTotal = (data.inquiries || 0) + 1;
+    const breakdown = data.breakdown || {};
+    breakdown[source] = (breakdown[source] || 0) + 1;
+    await kvPatch({ inquiries: newTotal, breakdown }, current.version);
+  } catch (e) {
+    console.warn("inquiry sync skipped:", e.message);
+  }
+}
+
+function trackInquiry(source) {
+  incrementInquiry(source);
+}
+window.trackInquiry = trackInquiry;
+
+async function syncFromDashboard() {
+  if (!SYNC_TOKEN || SYNC_TOKEN === "PASTE_YOUR_TOKEN_HERE") return;
+  try {
+    const current = await kvGet();
+    const data = current.data || {};
+    if (data.prices) applyPrices(data.prices);
+  } catch (e) {
+    console.warn("price sync skipped, using defaults:", e.message);
+  }
+  incrementVisit();
+}
+
+syncFromDashboard();
+</script>
 </body>
 </html>
