@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark only">
+<title>Admin Dashboard — qasim.dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0a1622;
+    --surface:#122234;
+    --ink:#e9edf2;
+    --amber:#e2a545;
+    --teal:#5fb6a9;
+    --red:#e2645a;
+    --line:rgba(255,255,255,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{background:var(--navy);color-scheme:dark;}
+  body{
+    background:var(--navy);color:var(--ink);font-family:'Inter',sans-serif;
+    line-height:1.6;min-height:100vh;
+  }
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 24px 80px;}
+
+  header.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;}
+  .logo{font-family:'JetBrains Mono',monospace;font-size:15px;}
+  .logo span{color:var(--teal);}
+  .badge{
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);
+    border:1px solid var(--line);padding:5px 10px;border-radius:5px;
+  }
+
+  /* GATE */
+  .gate{
+    max-width:380px;margin:14vh auto;background:var(--surface);border:1px solid var(--line);
+    border-radius:14px;padding:40px 36px;text-align:center;
+  }
+  .gate h2{font-size:24px;margin-bottom:8px;}
+  .gate p{opacity:0.7;font-size:14px;margin-bottom:24px;}
+  .gate input{
+    width:100%;padding:12px 14px;border-radius:7px;border:1.5px solid var(--line);
+    background:var(--navy);color:var(--ink);font-size:15px;margin-bottom:14px;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .gate input:focus{outline:none;border-color:var(--amber);}
+  .gate .err{color:var(--red);font-size:13px;min-height:18px;margin-bottom:8px;}
+
+  .btn{
+    padding:12px 22px;border-radius:7px;font-size:14.5px;font-weight:500;border:none;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s;font-family:'Inter',sans-serif;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+  .btn-primary{background:var(--amber);color:var(--navy);width:100%;}
+  .btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink);}
+  .btn-danger{background:transparent;border:1.5px solid var(--red);color:var(--red);}
+  .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+  /* SETUP */
+  .setup-box{
+    background:var(--surface);border:1px solid var(--amber);border-radius:12px;padding:28px 26px;margin-bottom:32px;
+  }
+  .setup-box h3{font-size:17px;color:var(--amber);margin-bottom:10px;}
+  .setup-box p{font-size:14px;opacity:0.8;margin-bottom:14px;}
+  .setup-box ol{padding-left:20px;font-size:14px;opacity:0.85;margin:10px 0;}
+  .setup-box li{margin-bottom:6px;}
+  .token-box{
+    background:var(--navy);border:1px solid var(--line);border-radius:7px;padding:14px;
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--teal);word-break:break-all;
+    margin:10px 0;
+  }
+
+  /* STATS */
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;}
+  .stat-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:26px;
+  }
+  .stat-card .label{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;}
+  .stat-card .value{font-family:'Fraunces',serif;font-size:42px;margin-top:8px;}
+
+  /* BREAKDOWN */
+  .breakdown-list{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin-bottom:32px;}
+  .breakdown-row{margin-bottom:16px;}
+  .breakdown-row:last-child{margin-bottom:0;}
+  .breakdown-row .row-top{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:6px;}
+  .breakdown-row .row-top .src-name{text-transform:capitalize;}
+  .breakdown-row .row-top .src-count{font-family:'JetBrains Mono',monospace;color:var(--teal);}
+  .breakdown-bar-track{height:8px;background:var(--navy);border-radius:4px;overflow:hidden;}
+  .breakdown-bar-fill{height:100%;background:var(--amber);border-radius:4px;transition:width .4s;}
+  .empty-note{opacity:0.55;font-size:13.5px;}
+
+  /* ACTIVITY */
+  .activity-list{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 24px;margin-bottom:32px;max-height:280px;overflow-y:auto;}
+  .activity-row{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px solid var(--line);font-size:13.5px;}
+  .activity-row:first-child{border-top:none;}
+  .activity-row .a-text{opacity:0.9;}
+  .activity-row .a-time{font-family:'JetBrains Mono',monospace;font-size:12px;opacity:0.5;white-space:nowrap;}
+
+  /* PRICE EDITOR */
+  .section-title{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;}
+  .section-title h2{font-size:22px;}
+  .section-title span{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal);}
+  .price-card{
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 20px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;
+  }
+  .price-card .name{font-size:15px;font-weight:500;}
+  .price-card .name small{display:block;font-size:12px;opacity:0.6;font-weight:400;margin-top:2px;}
+  .price-input-wrap{display:flex;align-items:center;gap:6px;}
+  .price-input-wrap span{opacity:0.6;}
+  .price-input-wrap input{
+    width:90px;padding:9px 10px;border-radius:6px;border:1.5px solid var(--line);
+    background:var(--navy);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:15px;
+  }
+  .price-input-wrap input:focus{outline:none;border-color:var(--amber);}
+
+  .save-row{display:flex;gap:12px;align-items:center;margin-top:20px;}
+  .save-msg{font-size:13px;font-family:'JetBrains Mono',monospace;}
+  .save-msg.ok{color:var(--teal);}
+  .save-msg.err{color:var(--red);}
+
+  .danger-zone{margin-top:48px;padding-top:24px;border-top:1px solid var(--line);}
+  .danger-zone p{font-size:13px;opacity:0.6;margin-bottom:12px;}
+
+  footer{text-align:center;padding:40px 0 0;font-family:'JetBrains Mono',monospace;font-size:12px;opacity:0.5;}
+
+  @media(max-width:560px){
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .price-card{flex-direction:column;align-items:flex-start;}
+  }
+  @media(max-width:400px){
+    .stats-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+  <h2>Admin access</h2>
+  <p>Enter your dashboard password to continue.</p>
+  <input type="password" id="pw-input" placeholder="Password" autocomplete="off">
+  <div class="err" id="pw-err"></div>
+  <button class="btn btn-primary" onclick="tryLogin()">Unlock dashboard</button>
+</div>
+
+<div id="app" class="wrap" style="display:none;">
+  <header class="top">
+    <div class="logo">qasim<span>.dev</span> <span style="opacity:0.5;">/ admin</span></div>
+    <div class="badge mono" id="conn-badge">● checking sync</div>
+  </header>
+
+  <div id="setup" class="setup-box" style="display:none;">
+    <h3>One-time setup needed</h3>
+    <p>The dashboard needs a sync token so it can talk to the same storage as your live site.</p>
+    <ol>
+      <li>Click "Generate sync token" below.</li>
+      <li>Copy the token shown and paste it into <span class="mono">index.html</span>, replacing <span class="mono">PASTE_YOUR_TOKEN_HERE</span> on the <span class="mono">SYNC_TOKEN</span> line.</li>
+      <li>Paste the same token into this dashboard's token field and bookmark this page — the token stays in the page URL so you don't have to redo this.</li>
+    </ol>
+    <button class="btn btn-ghost" onclick="generateToken()">Generate sync token</button>
+    <div id="new-token-box" style="display:none;">
+      <div class="token-box" id="new-token-text"></div>
+      <input type="text" id="manual-token-input" placeholder="Paste token here to continue" style="width:100%;padding:12px;border-radius:7px;border:1.5px solid var(--line);background:var(--navy);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;margin-bottom:10px;">
+      <button class="btn btn-primary" onclick="useManualToken()">Continue with this token</button>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="label mono">Site visits</div>
+      <div class="value" id="stat-visits">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label mono">Inquiries (WhatsApp + Fiverr)</div>
+      <div class="value" id="stat-inquiries">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label mono">Conversion rate</div>
+      <div class="value" id="stat-conversion">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="label mono">Most popular</div>
+      <div class="value" id="stat-top" style="font-size:22px;">—</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <h2>Inquiries by source</h2>
+    <span>which button people actually click</span>
+  </div>
+  <div id="breakdown-list" class="breakdown-list">
+    <p class="empty-note">Loading…</p>
+  </div>
+
+  <div class="section-title">
+    <h2>Recent activity</h2>
+    <span>last events, newest first</span>
+  </div>
+  <div id="activity-list" class="activity-list">
+    <p class="empty-note">Loading…</p>
+  </div>
+
+  <div class="section-title">
+    <h2>Pricing</h2>
+    <span>changes go live on your site instantly</span>
+  </div>
+
+  <div class="price-card">
+    <div class="name">Basic <small>1 page, basic JS, 3-day delivery</small></div>
+    <div class="price-input-wrap"><span>$</span><input type="number" id="price-basic" min="0"></div>
+  </div>
+  <div class="price-card">
+    <div class="name">Standard <small>up to 3 pages, contact form, 5-day delivery</small></div>
+    <div class="price-input-wrap"><span>$</span><input type="number" id="price-standard" min="0"></div>
+  </div>
+  <div class="price-card">
+    <div class="name">Premium <small>up to 5 pages, SEO, 7-day delivery</small></div>
+    <div class="price-input-wrap"><span>$</span><input type="number" id="price-premium" min="0"></div>
+  </div>
+  <div class="price-card">
+    <div class="name">Graphic Design <small>logo / poster / banner</small></div>
+    <div class="price-input-wrap"><span>$</span><input type="number" id="price-graphic" min="0"></div>
+  </div>
+
+  <div class="save-row">
+    <button class="btn btn-primary" style="width:auto;padding:12px 28px;" onclick="savePrices()" id="save-btn">Save prices</button>
+    <button class="btn btn-ghost" onclick="loadData()">Refresh</button>
+    <span class="save-msg" id="save-msg"></span>
+  </div>
+
+  <div class="danger-zone">
+    <p>Reset visit and inquiry counters back to zero. This cannot be undone.</p>
+    <button class="btn btn-danger" onclick="resetCounters()">Reset counters</button>
+  </div>
+
+  <footer>© 2026 Qasim Raza — Admin Dashboard</footer>
+</div>
+
+<script>
+/* ── Config ───────────────────────────────────────────────────── */
+const ADMIN_PASSWORD = "qasim2026"; // ⚠️ change this — see note in chat
+const KV_BASE = "https://key-value.co/api";
+const DEFAULT_PRICES = { basic: 80, standard: 90, premium: 105, graphic: 20 };
+
+let TOKEN = new URLSearchParams(location.search).get("token") || "";
+let currentVersion = null;
+
+/* ── Login gate (client-side only — see limitations note) ───────── */
+function tryLogin() {
+  const val = document.getElementById("pw-input").value;
+  if (val === ADMIN_PASSWORD) {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    boot();
+  } else {
+    document.getElementById("pw-err").textContent = "Incorrect password.";
+  }
+}
+document.getElementById("pw-input").addEventListener("keydown", e => { if (e.key === "Enter") tryLogin(); });
+
+/* ── Boot ─────────────────────────────────────────────────────── */
+function boot() {
+  if (!TOKEN) {
+    document.getElementById("setup").style.display = "block";
+    setBadge("no token set", "err");
+    return;
+  }
+  loadData();
+}
+
+function setBadge(text, state) {
+  const el = document.getElementById("conn-badge");
+  el.textContent = "● " + text;
+  el.style.color = state === "ok" ? "var(--teal)" : state === "err" ? "var(--red)" : "var(--amber)";
+}
+
+/* ── Token setup ──────────────────────────────────────────────── */
+async function generateToken() {
+  try {
+    const res = await fetch(`${KV_BASE}/generate`, { method: "POST", headers: { "Content-Type": "application/json" }, body: "{}" });
+    const json = await res.json();
+    if (!json.token) throw new Error(json.error || "no token returned");
+    document.getElementById("new-token-box").style.display = "block";
+    document.getElementById("new-token-text").textContent = json.token;
+    document.getElementById("manual-token-input").value = json.token;
+  } catch (e) {
+    alert("Couldn't auto-generate a token (" + e.message + "). You can also get one manually at key-value.co and paste it below.");
+    document.getElementById("new-token-box").style.display = "block";
+  }
+}
+
+function useManualToken() {
+  const val = document.getElementById("manual-token-input").value.trim();
+  if (!val) return;
+  TOKEN = val;
+  const url = new URL(location.href);
+  url.searchParams.set("token", val);
+  history.replaceState({}, "", url);
+  document.getElementById("setup").style.display = "none";
+  setBadge("token set — remember to paste it into index.html too", "ok");
+  // seed initial data if nothing stored yet
+  initData();
+}
+
+async function initData() {
+  try {
+    await fetch(`${KV_BASE}/store`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-KV-Token": TOKEN },
+      body: JSON.stringify({ data: { prices: DEFAULT_PRICES, visits: 0, inquiries: 0, breakdown: {} } })
+    });
+  } catch (e) { /* ignore */ }
+  loadData();
+}
+
+/* ── Data load/save ───────────────────────────────────────────── */
+const SOURCE_LABELS = {
+  whatsapp: "WhatsApp button",
+  fiverr: "Fiverr button",
+  basic: "Basic package",
+  standard: "Standard package",
+  premium: "Premium package",
+  graphic: "Graphic Design package"
+};
+
+async function loadData() {
+  if (!TOKEN) return;
+  setBadge("syncing…");
+  try {
+    const res = await fetch(`${KV_BASE}/retrieve`, { headers: { "X-KV-Token": TOKEN } });
+    if (res.status === 404) { await initData(); return; }
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const json = await res.json();
+    currentVersion = json.version;
+    const data = json.data || {};
+    const prices = data.prices || DEFAULT_PRICES;
+    document.getElementById("price-basic").value = prices.basic ?? DEFAULT_PRICES.basic;
+    document.getElementById("price-standard").value = prices.standard ?? DEFAULT_PRICES.standard;
+    document.getElementById("price-premium").value = prices.premium ?? DEFAULT_PRICES.premium;
+    document.getElementById("price-graphic").value = prices.graphic ?? DEFAULT_PRICES.graphic;
+
+    const visits = data.visits || 0;
+    const inquiries = data.inquiries || 0;
+    const breakdown = data.breakdown || {};
+
+    document.getElementById("stat-visits").textContent = visits;
+    document.getElementById("stat-inquiries").textContent = inquiries;
+    document.getElementById("stat-conversion").textContent = visits > 0 ? ((inquiries / visits) * 100).toFixed(1) + "%" : "—";
+
+    renderBreakdown(breakdown);
+    setBadge("synced", "ok");
+    loadActivity();
+  } catch (e) {
+    setBadge("sync failed: " + e.message, "err");
+  }
+}
+
+function renderBreakdown(breakdown) {
+  const entries = Object.entries(breakdown).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  const listEl = document.getElementById("breakdown-list");
+  const topEl = document.getElementById("stat-top");
+  if (entries.length === 0) {
+    listEl.innerHTML = '<p class="empty-note">No inquiries yet.</p>';
+    topEl.textContent = "—";
+    return;
+  }
+  topEl.textContent = SOURCE_LABELS[entries[0][0]] || entries[0][0];
+  const max = entries[0][1];
+  listEl.innerHTML = entries.map(([src, count]) => `
+    <div class="breakdown-row">
+      <div class="row-top">
+        <span class="src-name">${SOURCE_LABELS[src] || src}</span>
+        <span class="src-count">${count}</span>
+      </div>
+      <div class="breakdown-bar-track"><div class="breakdown-bar-fill" style="width:${(count / max * 100).toFixed(0)}%"></div></div>
+    </div>
+  `).join("");
+}
+
+function timeAgo(iso) {
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return mins + "m ago";
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + "h ago";
+  const days = Math.floor(hrs / 24);
+  return days + "d ago";
+}
+
+async function loadActivity() {
+  const listEl = document.getElementById("activity-list");
+  try {
+    const res = await fetch(`${KV_BASE}/history?limit=30`, { headers: { "X-KV-Token": TOKEN } });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const json = await res.json();
+    const events = (json.events || []).slice().reverse(); // oldest → newest for diffing
+    const rows = [];
+    let prev = null;
+    for (const ev of events) {
+      const d = (ev.payload && ev.payload.data) || {};
+      if (prev) {
+        if ((d.visits || 0) > (prev.visits || 0)) rows.push({ text: "New visit", time: ev.created_at });
+        if ((d.inquiries || 0) > (prev.inquiries || 0)) {
+          const prevB = prev.breakdown || {}, curB = d.breakdown || {};
+          let src = Object.keys(curB).find(k => (curB[k] || 0) > (prevB[k] || 0));
+          rows.push({ text: "Inquiry — " + (SOURCE_LABELS[src] || src || "unknown"), time: ev.created_at });
+        }
+        if (JSON.stringify(d.prices) !== JSON.stringify(prev.prices)) rows.push({ text: "Prices updated", time: ev.created_at });
+      }
+      prev = d;
+    }
+    rows.reverse(); // newest first
+    if (rows.length === 0) {
+      listEl.innerHTML = '<p class="empty-note">No activity yet.</p>';
+      return;
+    }
+    listEl.innerHTML = rows.slice(0, 20).map(r => `
+      <div class="activity-row"><span class="a-text">${r.text}</span><span class="a-time">${timeAgo(r.time)}</span></div>
+    `).join("");
+  } catch (e) {
+    listEl.innerHTML = '<p class="empty-note">Couldn\'t load activity: ' + e.message + '</p>';
+  }
+}
+
+async function savePrices() {
+  const btn = document.getElementById("save-btn");
+  const msg = document.getElementById("save-msg");
+  btn.disabled = true;
+  msg.textContent = "";
+  const prices = {
+    basic: Number(document.getElementById("price-basic").value) || 0,
+    standard: Number(document.getElementById("price-standard").value) || 0,
+    premium: Number(document.getElementById("price-premium").value) || 0,
+    graphic: Number(document.getElementById("price-graphic").value) || 0
+  };
+  try {
+    const res = await fetch(`${KV_BASE}/store`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", "X-KV-Token": TOKEN },
+      body: JSON.stringify({ version: currentVersion, patch: { set: { prices } } })
+    });
+    if (res.status === 409) {
+      msg.textContent = "Someone else updated it first — refreshing, please try again.";
+      msg.className = "save-msg err";
+      await loadData();
+      return;
+    }
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const json = await res.json();
+    currentVersion = json.version;
+    msg.textContent = "Saved — live on your site now.";
+    msg.className = "save-msg ok";
+  } catch (e) {
+    msg.textContent = "Save failed: " + e.message;
+    msg.className = "save-msg err";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function resetCounters() {
+  if (!confirm("Reset visits and inquiries to zero? This can't be undone.")) return;
+  try {
+    const res = await fetch(`${KV_BASE}/store`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json", "X-KV-Token": TOKEN },
+      body: JSON.stringify({ version: currentVersion, patch: { set: { visits: 0, inquiries: 0, breakdown: {} } } })
+    });
+    const json = await res.json();
+    currentVersion = json.version;
+    loadData();
+  } catch (e) {
+    alert("Reset failed: " + e.message);
+  }
+}
+</script>
+</body>
+</html>
