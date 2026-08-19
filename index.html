@@ -113,7 +113,8 @@
 
   /* SERVICES */
   .pkg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
-  .pkg{border:1px solid var(--line);border-radius:10px;padding:30px 26px;background:var(--surface);}
+  .pkg{border:1px solid var(--line);border-radius:10px;padding:30px 26px;background:var(--surface);display:block;cursor:pointer;transition:transform .15s,border-color .15s;}
+  .pkg:hover{transform:translateY(-3px);border-color:var(--teal);}
   .pkg.featured{border-color:var(--amber);border-width:2px;position:relative;}
   .pkg.featured::before{
     content:"MOST POPULAR";position:absolute;top:-11px;left:26px;
@@ -126,6 +127,7 @@
   .pkg ul{list-style:none;margin:20px 0 0;font-size:14px;}
   .pkg li{padding:7px 0;border-top:1px solid var(--line);opacity:0.85;}
   .pkg li:first-child{border-top:none;}
+  .pkg-cta{margin-top:20px;padding-top:14px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--teal);}
 
   /* WORK */
   .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
@@ -252,7 +254,7 @@
   <div class="wrap">
     <div class="section-head"><span class="num mono">03</span><h2>Services & pricing</h2></div>
     <div class="pkg-grid">
-      <div class="pkg">
+      <a class="pkg" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Basic%20package%20(%2415)%3A%0A-%201%20Page%0A-%20Responsive%20Design%0A-%20Basic%20JavaScript%0A-%201%20Revision%0A-%203%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
         <h3>Basic</h3>
         <div class="price">$15</div>
         <ul>
@@ -262,8 +264,9 @@
           <li>1 Revision</li>
           <li>3 Days Delivery</li>
         </ul>
-      </div>
-      <div class="pkg featured">
+        <div class="pkg-cta">Order on WhatsApp →</div>
+      </a>
+      <a class="pkg featured" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Standard%20package%20(%2435)%3A%0A-%20Up%20to%203%20Pages%0A-%20Responsive%20Design%0A-%20Standard%20JavaScript%0A-%20Contact%20Form%0A-%202%20Revisions%0A-%205%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
         <h3>Standard</h3>
         <div class="price">$35</div>
         <ul>
@@ -274,8 +277,9 @@
           <li>2 Revisions</li>
           <li>5 Days Delivery</li>
         </ul>
-      </div>
-      <div class="pkg">
+        <div class="pkg-cta">Order on WhatsApp →</div>
+      </a>
+      <a class="pkg" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Premium%20package%20(%2460)%3A%0A-%20Up%20to%205%20Pages%0A-%20Responsive%20Design%0A-%20Advanced%20JavaScript%0A-%20Contact%20Form%0A-%20SEO%20Optimization%0A-%203%20Revisions%0A-%207%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
         <h3>Premium</h3>
         <div class="price">$60</div>
         <ul>
@@ -287,8 +291,9 @@
           <li>3 Revisions</li>
           <li>7 Days Delivery</li>
         </ul>
-      </div>
-      <div class="pkg">
+        <div class="pkg-cta">Order on WhatsApp →</div>
+      </a>
+      <a class="pkg" href="https://wa.me/923134586476?text=Hi%2C%20I%27m%20interested%20in%20the%20Graphic%20Design%20package%20(%2420)%3A%0A-%20Logo%20%2F%20Poster%20%2F%20Banner%0A-%20Custom%20Concept%0A-%20High-Res%20Files%0A-%202%20Revisions%0A-%203%20Days%20Delivery%0A%0APlease%20share%20more%20details." target="_blank" rel="noopener">
         <h3>Graphic Design</h3>
         <div class="price">$20</div>
         <ul>
@@ -298,7 +303,8 @@
           <li>2 Revisions</li>
           <li>3 Days Delivery</li>
         </ul>
-      </div>
+        <div class="pkg-cta">Order on WhatsApp →</div>
+      </a>
     </div>
   </div>
 </section>
